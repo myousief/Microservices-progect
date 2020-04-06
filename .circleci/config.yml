@@ -31,8 +31,9 @@ jobs:
             - ./venv
           key: v1-dependencies-{{ checksum "requirements.txt" }}
       # run lint!s
-      - make:
+      - run:
           name: make lint
           command: |
-            . venv/bin/activate
+            hadolint Dockerfile
+            pylint --disable=R,C,W1202 app.py
             make lint 
